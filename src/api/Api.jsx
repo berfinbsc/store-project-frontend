@@ -11,6 +11,8 @@ export const endpoints={
     register:"/register",
     login:"/login",
     products:"/products",
+    about:"/about",
+
 
 }
 

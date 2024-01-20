@@ -15,8 +15,7 @@ const handlerSubmit=(e)=>{
 e.preventDefault();
 if(!userName || !email || !password || !passwordVerification) return;
 if(password!=passwordVerification) return;  // === mi == mi ?
-const user ={ userName:userName,email:email,password:password}
-getRegister(user)
+getRegister(userName,email,password)
 console.log("user information has been sent")
 }  
 
