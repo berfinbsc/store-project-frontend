@@ -14,7 +14,7 @@ function Cart() {
         <div className="extra content">
      
            <div className="ui two">
-           <button class="ui red basic button">Sepet</button>
+           <button class="ui orange basic button">Sepet</button>
             <button class="ui green basic button">Tamamla</button>
            </div>
 
