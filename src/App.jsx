@@ -24,8 +24,8 @@ function App() {
 
    <Route path='/' element={<Navbar/>} >    
    <Route index element={<Home/>} />
+   
    <Route path='about' element={<About/>} />
-
    <Route path='login' element={<Login/>}/>
    <Route path='register' element={<Register/>}/>
 
@@ -34,9 +34,7 @@ function App() {
    <Route index element={<Product/>}/>
    <Route path=':productId' element={<SingleProduct/>}/>
    </Route>
-
-  
-
+   
    </Route>
 
    </Routes>

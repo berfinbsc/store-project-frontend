@@ -25,7 +25,8 @@ export const getRegister=async(userName,email,password)=>{
 }
 
 export const getAllProducts=async()=>{
-    await  instance.get(endpoints.products);
+  return  await  instance.get(endpoints.products);
+
 }
 
 export const getOneProduct=async(id)=>{

@@ -23,25 +23,21 @@ console.log("user information has been sent")
   return (
     <div>
         <Form class="ui form" onSubmit={handlerSubmit}>
-<div>
-    <Label>user name</Label>
+<div className='ui field'>
     <Input type='text' name='userName' placeholder='user name' valus={userName} onChange={(e)=>setUserName(e.target.value)}></Input>
 </div>
 
-<div>
-    <Label>email</Label>
+<div className='ui field'>
     <Input type='text' name='email' placeholder='your email' valus={email} onChange={(e)=>setEmail(e.target.value)}></Input>
 </div>
-<div>
-    <Label>password</Label>
+<div className='ui field'>
     <Input type='text' name='password' placeholder='password' valus={password} onChange={(e)=>setPassword(e.target.value)}></Input>
 </div>
-<div>
-    <Label>password verification</Label>
+<div className='ui field'>
     <Input type='text' name='passwordVerification' placeholder='password verification' valus={passwordVerification} onChange={(e)=>setPasswordVerification(e.target.value)}></Input>
 </div>
-<div>
-    <Button type='submit'>Submit</Button>
+<div >
+    <Button className='ui green basic button' type='submit'>Submit</Button>
 </div>
         </Form>
       
