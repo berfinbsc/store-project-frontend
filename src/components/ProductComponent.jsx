@@ -1,12 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function ProductComponent(props) {
+
+const getToProduct = (id)=>{
+
+  return <Link to={`/product/${id}`}/>
+}
+
+
+
   return (
     <div>
 
 
       
-      <div className="ui card">
+      <div className="ui card" onClick={getToProduct(props.product.id)}>
 
       <div className="image content">
       <img src='../images/p.png' alt="img" height={350} width={400}/>

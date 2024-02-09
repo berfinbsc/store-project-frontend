@@ -12,6 +12,7 @@ export const endpoints={
     login:"/login",
     products:"/products",
     about:"/about",
+    product :"/product"
 
 
 }
