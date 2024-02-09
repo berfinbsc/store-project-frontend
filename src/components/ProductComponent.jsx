@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProductComponent() {
+function ProductComponent(props) {
   return (
     <div>
 
@@ -16,22 +16,23 @@ function ProductComponent() {
 
       <div className="content" >
       <div style={{marginTop: '-12px'}}>
-        <span>eddfsdfdsfdeı</span>
+        <span>{props.product.name}</span>
       </div>
 
       <div style={{marginTop: '-5px'}}>
       <span className="right floated ">
         <i className="heart outline like small icon"></i>
-        17 likes
+        {props.product.likesCount}
       </span>
       <span className="left floated">
       <i class="comment icon small"></i>
+      {props.product.rating}
       </span>
       </div>
 
       
       <div style={{marginTop: '25px'}}>
-        <span>500</span>
+        <span>{props.product.price}</span>
       </div>
       </div>
 

@@ -22,8 +22,7 @@ getAllProducts()
     <div className="ui four column relaxed grid">
     {products.map((product) => (
       <div className="ui column" key={product.id}>
-        <ProductComponent/>
-        {product.name}
+        <ProductComponent product={product} />
       </div>
     ))}
   </div>
