@@ -31,7 +31,7 @@ function ProductComponent(props) {
       </div>
 
       
-      <div style={{marginTop: '25px'}}>
+      <div style={{marginTop: '30px'}}>
         <span>{props.product.price}</span>
       </div>
       </div>
