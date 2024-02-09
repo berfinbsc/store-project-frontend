@@ -14,18 +14,25 @@ function ProductComponent() {
 
 
 
-      <div className="content">
-      <div >
-        <span>edeı</span>
+      <div className="content" >
+      <div style={{marginTop: '-12px'}}>
+        <span>eddfsdfdsfdeı</span>
       </div>
 
-      <span className="right floated">
-        <i className="heart outline like icon"></i>
+      <div style={{marginTop: '-5px'}}>
+      <span className="right floated ">
+        <i className="heart outline like small icon"></i>
         17 likes
       </span>
       <span className="left floated">
-      <i class="comment icon"></i>
+      <i class="comment icon small"></i>
       </span>
+      </div>
+
+      
+      <div style={{marginTop: '25px'}}>
+        <span>500</span>
+      </div>
       </div>
 
 
