@@ -1,12 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 function ProductComponent(props) {
-
-const getToProduct = (id)=>{
-
-  return <Link to={`/product/${id}`}/>
-}
+ 
 
 
 
@@ -15,17 +12,22 @@ const getToProduct = (id)=>{
 
 
       
-      <div className="ui card" onClick={getToProduct(props.product.id)}>
+<div className="ui card">
 
-      <div className="image content">
-      <img src='../images/p.png' alt="img" height={350} width={400}/>
-      </div>
+          <div className="image content">
+            <Link to={`/product/${props.product._id}`}>
+            <img src={props.product.image} alt="img" height={250} />
+            </Link>
+          </div>
+      
 
 
 
       <div className="content" >
       <div style={{marginTop: '-12px'}}>
+        <Link to={`/product/${props.product._id}`}>
         <span>{props.product.name}</span>
+        </Link>
       </div>
 
       <div style={{marginTop: '-5px'}}>
@@ -34,7 +36,7 @@ const getToProduct = (id)=>{
         {props.product.likesCount}
       </span>
       <span className="left floated">
-      <i class="comment icon small"></i>
+      <i className="comment icon small"></i>
       {props.product.rating}
       </span>
       </div>

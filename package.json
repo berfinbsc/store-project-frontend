@@ -20,7 +20,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.2",
     "semantic-ui-css": "^2.5.0",
-    "semantic-ui-react": "^2.1.5"
+    "semantic-ui-react": "^2.1.5",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

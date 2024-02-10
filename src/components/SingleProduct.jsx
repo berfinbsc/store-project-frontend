@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
 import { getOneProduct } from '../api/Http';
 
 export default function SingleProduct() {
 
  const  {productId} = useParams();
 
-const [product,setProduct] = useState([]);
+const [product,setProduct] = useState({});
 
 
 useEffect(()=>{
-getOneProduct(productId)
-.then((data)=>{setProduct(data.data.product); console.log(data.data.product)})
+
+try {
+  getOneProduct(productId)
+.then((data)=>{console.log(data.data.product); setProduct(data.data.product); })
+
+} catch (error) {
+  console.log("erişim başarısız:", error);
+}
+
 
 },[]);
 
-<Link to='/product'>back to products</Link>
 
   return (
 <section>
@@ -24,7 +30,7 @@ getOneProduct(productId)
 <div className="ui  equal width grid">
 
 <div className="seven wide column">
-<img src="" alt=""  height={400} width={500}/>
+<img src={product.image} height={280} width={230}/>
 </div>
 
 
@@ -42,13 +48,13 @@ getOneProduct(productId)
 
 
 
-<div className='content' style={{marginTop: '10px'}}>
+<div className='content' style={{marginTop: '1px'}}>
 <span className="card right floated ">
-        <i className="heart outline like icon"></i>
+        <i className="heart outline like small icon"></i>
         {product.likesCount}
       </span>
       <span className="card left floated">
-      <i class="comment icon"></i>
+      <i class="comment small icon"></i>
       {product.rating}
       </span>
 </div>

@@ -30,6 +30,7 @@ export const getAllProducts=async()=>{
 }
 
 export const getOneProduct=async(id)=>{
+  console.log("get one product : "+id)
     return await instance.get(endpoints.product+"/"+id);
 }
 
