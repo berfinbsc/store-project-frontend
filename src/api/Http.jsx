@@ -52,4 +52,19 @@ try {
 
 
 
+
+}
+
+
+
+export const addToCart=async(productId,userId)=>{
+
+  try {
+    const token = await localStorage.getItem('token')
+    console.log("get token from session storage"+token)
+    const res =  await instance.post(endpoints.addtocart,{productId,userId,token})
+    console.log("mesaj : "+res.data.msg)
+  } catch (error) {
+    console.log("erişim başarısız:", error);
+  }
 }

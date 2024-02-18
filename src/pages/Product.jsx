@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { getAllProducts } from '../api/Http';
 import ProductComponent from '../components/ProductComponent';
 import { Link } from 'react-router-dom';
-
+import Icon from '@mui/material/Icon';
+import { IconButton } from '@mui/material';
 const Product = ()=> {
 
   const [products,setProducts] = useState([]);
@@ -20,14 +21,26 @@ getAllProducts()
 
 
   return (
+<div className="">
 
-    <div className="ui four column relaxed grid">
+<div class="ui button right floated" >
+    <i class="shop icon"></i>
+</div>
+
+
+<div className="ui four column relaxed grid">
     {products.map((product) => (
       <div className="ui column" key={product._id}>
         <ProductComponent product={product} />
       </div>
     ))}
   </div>
+
+
+
+</div>
+
+  
 
   )
 }

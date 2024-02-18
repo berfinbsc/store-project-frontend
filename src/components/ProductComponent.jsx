@@ -32,11 +32,11 @@ function ProductComponent(props) {
 
       <div style={{marginTop: '-5px'}}>
       <span className="right floated ">
-        <i className="heart outline like small icon"></i>
+        <i className="  like  icon"></i>
         {props.product.likesCount}
       </span>
       <span className="left floated">
-      <i className="comment icon small"></i>
+      <i className="comment icon "></i>
       {props.product.rating}
       </span>
       </div>
