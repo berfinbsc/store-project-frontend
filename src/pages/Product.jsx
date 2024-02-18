@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { getAllProducts } from '../api/Http';
 import ProductComponent from '../components/ProductComponent';
 import { Link } from 'react-router-dom';
-import Icon from '@mui/material/Icon';
-import { IconButton } from '@mui/material';
 const Product = ()=> {
 
   const [products,setProducts] = useState([]);
@@ -12,7 +10,7 @@ const Product = ()=> {
 useEffect(()=>{
 
 getAllProducts()
-.then((data)=>{setProducts(data.data.products); console.log(data.data.products)})
+.then((data)=>{setProducts(data.data.products); console.log(data)})
 .catch((error)=>{console.log(error)})
 
 },[])
@@ -23,8 +21,11 @@ getAllProducts()
   return (
 <div className="">
 
-<div class="ui button right floated" >
-    <i class="shop icon"></i>
+<div className="ui button right floated" >
+
+  <Link to="/cart">
+  <i className="shop icon"></i>
+  </Link>
 </div>
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import CartItem from './CartItem'
 
-function Cart() {
+function CartSmall() {
 
   return (
     <div>
@@ -14,8 +14,8 @@ function Cart() {
         <div className="extra content">
      
            <div className="ui two">
-           <button class="ui orange basic button">Sepet</button>
-            <button class="ui green basic button">Tamamla</button>
+           <button className="ui orange basic button">Sepet</button>
+            <button className="ui green basic button">Tamamla</button>
            </div>
 
         </div>
@@ -25,4 +25,4 @@ function Cart() {
   )
 }
 
-export default Cart
+export default CartSmall

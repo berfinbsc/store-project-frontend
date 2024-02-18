@@ -10,6 +10,7 @@ import SingleProduct from './components/SingleProduct'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import About from './pages/About'
+import Cart from './pages/Cart'
 
 
 function App() {
@@ -22,13 +23,14 @@ function App() {
    <Routes>
 
 
-   <Route path='/' element={<Navbar/>} >    
+   <Route path='/' element={<Navbar/>} >   
+
    <Route index element={<Home/>} />
-   
    <Route path='about' element={<About/>} />
    <Route path='login' element={<Login/>}/>
    <Route path='register' element={<Register/>}/>
    <Route path='product/:productId' element={<SingleProduct/>}/>
+  <Route path='cart' element={<Cart/>}/>
 
 
    <Route path='products' element={<ProductLayout/>}>

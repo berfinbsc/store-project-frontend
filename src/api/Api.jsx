@@ -14,6 +14,7 @@ export const endpoints={
     about:"/about",
     product :"/product",
     addtocart : "/addtocart",
+    getcart : "/getcart",
 
 }
 

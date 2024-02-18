@@ -1,6 +1,6 @@
 import React from 'react'
 import CartItemPay from './CartItemPay'
-import Cart from './Cart'
+import Cart from './CartSmall'
 
 function CartPay() {
 
@@ -25,7 +25,7 @@ function CartPay() {
     </div>
     
 </div>
-<button class="ui orange basic button">Tamamla</button>
+<button className="ui orange basic button">Tamamla</button>
 
 
 <Cart/>
