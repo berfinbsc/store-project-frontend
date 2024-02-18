@@ -57,39 +57,3 @@ try {
 
 
 
-export const addToCart=async(productId,userId)=>{
-
-  try {
-    const token = await localStorage.getItem('token')
-    console.log("get token from session storage"+token)
-    const res =  await instance.post(endpoints.addtocart,{productId,userId,token})
-    console.log("mesaj : "+res.data.msg)
-  } catch (error) {
-    console.log("erişim başarısız:", error);
-  }
-}
-
-
-
-
-export const getCart = async()=>{
-try {
-  
-  const token = await localStorage.getItem('token')
-  console.log("get token from session storage"+token)
-
-  if(token){
-    const res = await instance.get(endpoints.getcart,{
-      headers:{Authorization:`Bearer ${token}`
-      }});
-
-    console.log(res)
-    return res;
-  }
-  else{
-    console.log("giriş yapınız")
-  }
-
-} catch (error) {
-  console.log(error)
-}}

@@ -15,6 +15,9 @@ export const endpoints={
     product :"/product",
     addtocart : "/addtocart",
     getcart : "/getcart",
+    reduceQuantity : "/reduceQuantity",
+    increaseQuantity : "/increaseQuantity",
+    deleteFromCart : "/deleteFromCart",
 
 }
 
