@@ -4,7 +4,7 @@ import CartItemPay from '../components/CartItemPay'
 
 export default function Cart() {
 
-const [products,setProducts] = useState([])
+const [products,setProducts] = useState([]);
 
 
 useEffect(()=>{
@@ -20,30 +20,22 @@ useEffect(()=>{
 },[])
     
   return (
-
-
-
     <div>
 
 
       
-      <div className="ui column divided grid">
+      <div className="">
 
 
         {
-          products.map((product) =>{
+          products.map((product) =>(
 
             <div className="column" key={product.productId}>
              <CartItemPay product = {product}/>
             </div>
 
-          })
+          ))
         }
-
-
-      
-
-
 
           <button className="ui orange basic button">Tamamla</button>
       </div>

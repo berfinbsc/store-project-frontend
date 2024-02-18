@@ -1,11 +1,12 @@
 import React from 'react'
+
+
 function CartItemPay(props) {
 
 
   return (
     <div>
-  
-
+      
 <div className="ui segment equal width grid">
   
 <div className="four wide column">
