@@ -13,7 +13,7 @@ export const endpoints={
     products:"/products",
     about:"/about",
     product :"/product",
-    addtocart : "/addtocart",
+    addToCart : "/addToCart",
     getcart : "/getcart",
     reduceQuantity : "/reduceQuantity",
     increaseQuantity : "/increaseQuantity",
