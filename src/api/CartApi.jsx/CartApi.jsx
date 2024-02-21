@@ -45,7 +45,7 @@ import { endpoints, instance } from "../Api"
         const res = await instance.post(endpoints.reduceQuantity,{productId},{
             headers:{Authorization:`Bearer ${token}`
     }});
-    
+    console.log(res);
     return res;
     
     } catch (error) {
