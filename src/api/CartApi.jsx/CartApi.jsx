@@ -10,7 +10,7 @@ import { endpoints, instance } from "../Api"
       const res = await instance.get(endpoints.getcart,{
         headers:{Authorization:`Bearer ${token}`
         }});
-      console.log(res)
+      console.log(" get cart from api : : : : : " + res)
       return res;
     }
    catch (error) {
