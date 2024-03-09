@@ -1,24 +1,55 @@
 import { render } from "react-dom"
 import { endpoints, instance } from "./Api"
 
-export const login=async(email,password)=>{
-  try {
-    const resp = await instance.post(endpoints.login,{email,password})
-    console.log("get token  : "+resp.data.token)
-
-    await localStorage.removeItem('token')
-
-    await localStorage.setItem('token',resp.data.token)
 
 
-    
-  } catch (error) {
-    console.log("Giriş başarısız:", error);
 
-  }
 
-  
+
+export const getUser=async()=>{
+  const token = await localStorage.getItem('token')
+    if(!token){
+        return console.log("token yok : : ");
+    }
+    try {
+        const data = await instance.get(endpoints.user, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        console.log("getUser : "+data.user)
+        return data.user;
+    } catch (error) {
+        console.log("getUser işleminde hata : :" + error);                                   
 }
+}
+
+
+
+
+export const login=async(email,password)=>{
+
+  try {
+  instance.post(endpoints.login,{email,password}).then(resp=>{
+    if(!resp.ok){
+      throw new Error("Giriş yapılamadı : "+ resp.data.message )
+    }
+    return resp.data.token;
+  })
+
+     
+  } catch (error) {
+    console.log("Login işleminde hata : :" + error);
+
+  }}
+
+
+
+
+
+
+
+
 
 export const getRegister=async(userName,email,password)=>{
     await  instance.post(endpoints.register,{userName,email,password})

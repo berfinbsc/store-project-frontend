@@ -16,9 +16,9 @@ const reduce = ()=>{
    .then((data)=>{ 
     setProduct(prevProduct =>({...prevProduct ,quantity : data.data.quantity , total : data.data.total
     }))
-    .then(subTotal)
   })
- 
+  .then(subTotal)
+
   }
 
 

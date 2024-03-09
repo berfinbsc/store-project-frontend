@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form, Input, Label } from 'semantic-ui-react';
-import { login } from '../api/Http';
+import AuthContext, { login } from '../auth/AuthContext';
 const Login = ()=> {
 
 const [email,setEmail]=useState();
 const [password,setPassword]=useState();
+const {login}=useContext(AuthContext)
+
 
 const handlerSubmit =(e)=>{
   e.preventDefault();
