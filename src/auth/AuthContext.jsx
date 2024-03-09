@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { createContext } from'react'
 import { login, getUser } from '../api/Http'
+import { Profile } from '../pages/Profile';
 
-  export const AuthContext = createContext();
+    export const AuthContext = React.createContext();
 
- export const AuthProvider = ({children}) => {
+  export  const AuthProvider = ({children}) => {
 
 const [user,setUser] = useState(null);
+
+
 
 const getLogin = async(email,password) => {
 try {
@@ -20,14 +23,23 @@ catch (error) {
   console.log("Login işleminde hata 2 : :" + error);
 }}
 
+
+
+
+
 const logOut = () => {  
     localStorage.removeItem('token')
     setUser(null)
 
 }
+
+
+
   return (
    <AuthContext.Provider value={{user,logOut,getLogin}}>
-    {children}
+    <Login/>
+    <Profile/>
     </AuthContext.Provider>
   )
 }
+

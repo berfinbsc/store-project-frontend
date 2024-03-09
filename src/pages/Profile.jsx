@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AuthContext } from '../auth/AuthContext';
+import { AuthContext } from '../App';
 
 export const Profile = () => {
 
@@ -11,7 +11,6 @@ const {user,logOut}=useContext(AuthContext);
 
   return (
     <div>
-        Hello 
         <button onClick={logOut}>Logout</button>
 
     </div>

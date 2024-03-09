@@ -11,20 +11,41 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import About from './pages/About'
 import Cart from './pages/Cart'
-import { AuthProvider } from './auth/AuthContext'
 import { Profile } from './pages/Profile'
+import 'semantic-ui-css/semantic.min.css';
+import { createContext, useState } from 'react'
+export const AuthContext = createContext();
 
 
 function App() {
+
+  const [user,setUser] = useState(null);
+  const getLogin = async(email,password) => {
+    try {
+    const token = await login(email,password);
+    await localStorage.removeItem('token')
+    await localStorage.setItem('token',token)
+    const userGet = await getUser()
+    setUser(userGet);
+    } 
+    catch (error) {
+      console.log("Login işleminde hata 2 : :" + error);
+    }}
+    
+    const logOut = () => {  
+        localStorage.removeItem('token')
+        setUser(null)
+    
+    }
+    
+
+
   return (
 <>
-
-<AuthProvider>
-  <Profile/>
-  <Login/>
-</AuthProvider>
-
-
+<AuthContext.Provider value={{user,logOut,getLogin}}>
+    <Login/>
+    <Profile/>
+    </AuthContext.Provider>
 
 <BrowserRouter>
    <Routes>
