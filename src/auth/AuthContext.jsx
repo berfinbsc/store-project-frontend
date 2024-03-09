@@ -1,50 +1,32 @@
 import React, { useState } from 'react'
 import { createContext } from'react'
-import Login, { getUser } from '../api/Http';
-import { endpoints, instance } from '../api/Api';
+import { login, getUser } from '../api/Http'
 
-const AuthContext = createContext();
+  export const AuthContext = createContext();
 
-
-
-export default function AuthContext() {
+ export const AuthProvider = ({children}) => {
 
 const [user,setUser] = useState(null);
 
-
-
-
-
-const login = async(email,password) => {
-
+const getLogin = async(email,password) => {
 try {
-  
-const token = await Login(email,password);
+const token = await login(email,password);
 await localStorage.removeItem('token')
 await localStorage.setItem('token',token)
-
-const getUser = await getUser()
-setUser(getUser);
-
-} catch (error) {
- 
+const userGet = await getUser()
+setUser(userGet);
+} 
+catch (error) {
   console.log("Login işleminde hata 2 : :" + error);
 }}
-
-
-
 
 const logOut = () => {  
     localStorage.removeItem('token')
     setUser(null)
 
 }
-
-
-
-
   return (
-   <AuthContext.Provider value={{user,logOut,login}}>
+   <AuthContext.Provider value={{user,logOut,getLogin}}>
     {children}
     </AuthContext.Provider>
   )

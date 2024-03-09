@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../auth/AuthContext';
 
-export default function Profile() {
+export const Profile = () => {
 
 
 const {user,logOut}=useContext(AuthContext);
@@ -10,7 +11,7 @@ const {user,logOut}=useContext(AuthContext);
 
   return (
     <div>
-        Hello {user.name}
+        Hello 
         <button onClick={logOut}>Logout</button>
 
     </div>

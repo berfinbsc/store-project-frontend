@@ -1,26 +1,25 @@
 import React, { useContext, useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Form, Input, Label } from 'semantic-ui-react';
-import AuthContext, { login } from '../auth/AuthContext';
+import { Button, Form, Input } from 'semantic-ui-react';
+import { AuthContext } from '../auth/AuthContext';
 const Login = ()=> {
 
 const [email,setEmail]=useState();
 const [password,setPassword]=useState();
-const {login}=useContext(AuthContext)
+const {getLogin}=useContext(AuthContext)
 
 
 const handlerSubmit =(e)=>{
   e.preventDefault();
   if(!email || !password) return;
-login(email,password)
+  getLogin(email,password)
 
 }
-
   return (
   
 
-
 <Form class="ui form" onSubmit={handlerSubmit}>
+
   <div class="field">
     <Input type="text" name="first-name" placeholder="enter your e-mail" value={email} onChange={
       (e)=>{setEmail(e.target.value)}}

@@ -11,11 +11,18 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import About from './pages/About'
 import Cart from './pages/Cart'
+import { AuthProvider } from './auth/AuthContext'
+import { Profile } from './pages/Profile'
 
 
 function App() {
   return (
 <>
+
+<AuthProvider>
+  <Profile/>
+  <Login/>
+</AuthProvider>
 
 
 
