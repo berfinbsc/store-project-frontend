@@ -12,7 +12,6 @@ import Register from './pages/Register'
 import About from './pages/About'
 import Cart from './pages/Cart'
 import 'semantic-ui-css/semantic.min.css';
-import UserProfile from './pages/UserProfile'
 
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
    <Route path='register' element={<Register/>}/>
    <Route path='product/:productId' element={<SingleProduct/>}/>
   <Route path='cart' element={<Cart/>}/>
-  <Route path='profile' element={<UserProfile/>}/>
 
 
    <Route path='products' element={<ProductLayout/>}>
