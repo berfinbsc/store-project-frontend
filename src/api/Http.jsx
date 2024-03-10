@@ -8,17 +8,18 @@ import { endpoints, instance } from "./Api"
 
 export const getUser=async()=>{
   const token = await localStorage.getItem('token')
+  console.log("get token from session storage"+token);
     if(!token){
         return console.log("token yok : : ");
     }
     try {
         const data = await instance.get(endpoints.user, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization:`Bearer ${token}`
             }
         })
-        console.log("getUser : "+data.user)
-        return data.user;
+        console.log(data.data);
+        return data.data;
     } catch (error) {
         console.log("getUser işleminde hata : :" + error);                                   
 }
@@ -27,14 +28,18 @@ export const getUser=async()=>{
 
 
 
+
+
+
 export const login=async(email,password)=>{
 
   try {
   instance.post(endpoints.login,{email,password}).then(resp=>{
-    if(!resp.ok){
+    if(!resp.data.token){
       throw new Error("Giriş yapılamadı : "+ resp.data.message )
     }
-    return resp.data.token;
+    console.log("Login : "+resp.data.token);
+    localStorage.setItem('token',resp.data.token);
   })
 
      

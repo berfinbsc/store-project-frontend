@@ -1,22 +1,63 @@
-import React, { useContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form, Input } from 'semantic-ui-react';
-import { AuthContext } from '../App';
-const Login = ()=> {
+import { getUser, login } from '../api/Http';
+import LogSing from '../components/LogSing';
+import UserProfile from './UserProfile';
+
+
+export const AuthContext = createContext();
+
+const Login = ({children})=> {
 
 const [email,setEmail]=useState();
 const [password,setPassword]=useState();
-const {getLogin}=useContext(AuthContext)
+const [user,setUser] = useState(null);
+const [isLogin,setLogin] = useState(false);
 
 
-const handlerSubmit =(e)=>{
+
+
+
+const handlerSubmit =async(e)=>{
   e.preventDefault();
   if(!email || !password) return;
-  getLogin(email,password)
+
+  login(email,password).then(()=>{
+    setLogin(true);
+  }).then(()=>{
+    getUser().then(user=>{
+      //console.log(user.userName)
+      setUser(user);
+    })
+  });
+ 
+
+    
+
 
 }
+
+
+
+const handleLogout = () => {
+  localStorage.removeItem('token');
+  setUser(null);
+  setLogin(false);
+};
+
+
   return (
   
+
+<>
+<AuthContext.Provider value={{user,isLogin}}>
+    <LogSing/>
+    <UserProfile/>
+    </AuthContext.Provider>
+
+
+
 
 <Form className="ui form" onSubmit={handlerSubmit}>
 
@@ -37,6 +78,9 @@ const handlerSubmit =(e)=>{
 </div>
 </Form>
 
+
+
+</>
 
 
 
