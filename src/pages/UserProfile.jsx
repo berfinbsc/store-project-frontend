@@ -4,14 +4,14 @@ import { AuthContext } from './Login';
 export default function UserProfile(){
 
 
-const {user}=useContext(AuthContext);
+const user=useContext(AuthContext);
 
 
 
 
   return (
     <div>
-      {user.userName}
+      {user}
     </div>
   )
 }

@@ -6,9 +6,9 @@ import LogSing from '../components/LogSing';
 import UserProfile from './UserProfile';
 
 
-export const AuthContext = createContext();
+export const AuthContext = React.createContext();
 
-const Login = ({children})=> {
+const Login = ({UserProfile})=> {
 
 const [email,setEmail]=useState();
 const [password,setPassword]=useState();
@@ -28,7 +28,7 @@ const handlerSubmit =async(e)=>{
   }).then(()=>{
     getUser().then(user=>{
       //console.log(user.userName)
-      setUser(user);
+      setUser(user.userName);
     })
   });
  
@@ -51,8 +51,7 @@ const handleLogout = () => {
   
 
 <>
-<AuthContext.Provider value={{user,isLogin}}>
-    <LogSing/>
+<AuthContext.Provider value={{user}}>
     <UserProfile/>
     </AuthContext.Provider>
 
