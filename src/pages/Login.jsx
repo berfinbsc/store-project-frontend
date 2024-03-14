@@ -5,7 +5,6 @@ import { getUser, login } from '../api/Http'
 import { useDispatch } from 'react-redux';
 import { loginReduc } from '../store/user/UserSlice';
 
-
 const Login = ()=> {
 const dispatch = useDispatch();
 const [email,setEmail]=useState();
@@ -16,24 +15,20 @@ const [password,setPassword]=useState();
 
 
 
-const handlerSubmit =async(e)=>{
+const handlerSubmit = async (e) => {
   e.preventDefault();
-  if(!email || !password) return;
+  if (!email || !password) return;
 
-  login(email,password)
-  .then(()=>{
-getUser();
-  })
-  .then((user)=>{
-    console.log("user: " + user);
-    console.log(user);
-    dispatch(loginReduc(user))
-  })
-  .catch((err)=>{
+  try {
+    await login(email, password);
+    const user = await getUser();
+    console.log( user);
+    dispatch(loginReduc(user));
+  } catch (err) {
     console.log(err);
-  });
+  }
+};
 
-}
 
 
 

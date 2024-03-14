@@ -13,6 +13,7 @@ const {user,isAuthenticated} =useSelector(store=>store.user);
       
 {console.log(user)}
     {user.userName ? user.userName : 'Hello' }
+    <div></div>
     {isAuthenticated ? 'logined' : 'not logined '}
 
 
