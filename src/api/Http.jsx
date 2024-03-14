@@ -18,7 +18,7 @@ export const getUser=async()=>{
             }
         })
         console.log(data.data);
-        return data.data;
+        return  data.data;
     } catch (error) {
         console.log("getUser işleminde hata : :" + error);                                   
 }

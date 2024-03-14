@@ -1,11 +1,13 @@
 import React, {  useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form, Input } from 'semantic-ui-react';
-import { login } from '../api/Http'
+import { getUser, login } from '../api/Http'
+import { useDispatch } from 'react-redux';
+import { loginReduc } from '../store/user/UserSlice';
 
 
 const Login = ()=> {
-
+const dispatch = useDispatch();
 const [email,setEmail]=useState();
 const [password,setPassword]=useState();
 
@@ -19,6 +21,17 @@ const handlerSubmit =async(e)=>{
   if(!email || !password) return;
 
   login(email,password)
+  .then(()=>{
+getUser();
+  })
+  .then((user)=>{
+    console.log("user: " + user);
+    console.log(user);
+    dispatch(loginReduc(user))
+  })
+  .catch((err)=>{
+    console.log(err);
+  });
 
 }
 

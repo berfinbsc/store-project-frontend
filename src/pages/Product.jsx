@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAllProducts } from '../api/Http';
 import ProductComponent from '../components/ProductComponent';
 import { Link } from 'react-router-dom';
+import Log from '../components/Log';
 const Product = ()=> {
 
   const [products,setProducts] = useState([]);
@@ -20,6 +21,9 @@ getAllProducts()
 
   return (
 <div className="">
+<Log></Log>
+
+
 
 <div className="ui button right floated" >
 
