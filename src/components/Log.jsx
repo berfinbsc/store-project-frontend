@@ -7,7 +7,7 @@ const Log = () => {
     //initialState => user,isLogned
 const {user,isAuthenticated} =useSelector(store=>store.user);
 
-
+ 
   return (
     <div>
       

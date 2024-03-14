@@ -11,7 +11,7 @@ export const getUser=async()=>{
     if(!token){
         return console.log("token yok : : ");
     }
-    try {
+    try { 
         const data = await instance.get(endpoints.user, {
             headers: {
                 Authorization:`Bearer ${token}`
