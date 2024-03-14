@@ -21,9 +21,8 @@ const handlerSubmit = async (e) => {
 
   try {
     await login(email, password);
-    const user = await getUser();
-    console.log( user);
-    dispatch(loginReduc(user));
+    await getUser();
+   
   } catch (err) {
     console.log(err);
   }

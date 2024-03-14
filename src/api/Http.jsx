@@ -11,14 +11,17 @@ export const getUser=async()=>{
     if(!token){
         return console.log("token yok : : ");
     }
-    try {  
+    try { 
         const data = await instance.get(endpoints.user, {
             headers: {
                 Authorization:`Bearer ${token}`
             }
         })
-        console.log(data.data);
-        return  data.data;
+        const user = data.data;
+        console.log(user);
+        await localStorage.setItem('user', JSON.stringify(user));
+      
+
     } catch (error) {
         console.log("getUser işleminde hata : :" + error);                                   
 }

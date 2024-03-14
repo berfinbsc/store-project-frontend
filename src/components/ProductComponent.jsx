@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import Log from './Log'
 
 function ProductComponent(props) {
  
@@ -11,7 +11,6 @@ function ProductComponent(props) {
     <div>
 
 
-      
 <div className="ui card">
 
           <div className="image content">

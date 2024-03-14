@@ -21,7 +21,6 @@ getAllProducts()
 
   return (
 <div className="">
-<Log></Log>
 
 
 
