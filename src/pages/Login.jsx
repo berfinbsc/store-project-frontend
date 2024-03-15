@@ -2,29 +2,36 @@ import React, {  useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Form, Input } from 'semantic-ui-react';
 import { getUser, login } from '../api/Http'
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginReduc } from '../store/user/UserSlice';
 
 const Login = ()=> {
-const dispatch = useDispatch();
-const [email,setEmail]=useState();
-const [password,setPassword]=useState();
+const [email,setEmail]=useState('');
+const [password,setPassword]=useState('');
 
- 
+const navigate = useNavigate();
+const dispatch = useDispatch();
+
  
 
  
 
 const handlerSubmit = async (e) => {
   e.preventDefault();
-  if (!email || !password) return;
+
+  if (!email || !password) {
+    console.error('Please enter both email and password.');
+    return;
+  }
 
   try {
     await login(email, password);
-    await getUser();
-   
+    const user = await getUser();
+   await dispatch(loginReduc(user));
+   navigate('/products');
   } catch (err) {
-    console.log(err);
+    console.error('Login error:', err);
   }
 };
 
