@@ -2,16 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { getAllProducts } from '../api/Http';
 import ProductComponent from '../components/ProductComponent';
 import { Link } from 'react-router-dom';
-import Log from '../components/Log';
+import {  useSelector } from 'react-redux';
+import { store } from '../store/Store';
 const Product = ()=> {
 
   const [products,setProducts] = useState([]);
+const {user,isAuthenticated} =useSelector(store=>store.user);
 
 
 useEffect(()=>{
-
 getAllProducts()
-.then((data)=>{setProducts(data.data.products); console.log(data)})
+.then((data)=>{
+  setProducts(data.data.products);
+   console.log(data)})
 .catch((error)=>{console.log(error)})
 
 },[])
@@ -19,10 +22,31 @@ getAllProducts()
 
 
 
+const isLike = (id)=>{
+
+  if(user && user.liked && user.liked.includes(id)){
+    console.log(true)
+    return 'orange';
+  }
+  console.log(false)
+
+  return 'gray';
+}
+
+
+
+
+
+
+
+
+
+
   return (
 <div className="">
 
-
+{user.userName }
+{user.liked}
 
 <div className="ui button right floated" >
 
@@ -34,12 +58,15 @@ getAllProducts()
 
 <div className="ui four column relaxed grid">
     {products.map((product) => (
-      <div className="ui column" key={product._id}>
-        <ProductComponent product={product} />
+
+     <div className="ui column" key={product._id}>  
+        <ProductComponent product={product} liked={isLike(product._id)} />
       </div>
     ))}
-  </div>
 
+
+    
+  </div>
 
 
 </div>

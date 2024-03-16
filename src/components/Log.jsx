@@ -20,7 +20,7 @@ useEffect(()=>{
     }
     else{
       console.log("not logined");
-    }},[dispatch])
+    }},[dispatch,localStorage])
 
 
 const handleLogOut =() => {

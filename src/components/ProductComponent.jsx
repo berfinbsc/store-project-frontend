@@ -1,10 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Log from './Log'
+import likeApi from '../api/likeApi/LikeApi';
 
 function ProductComponent(props) {
  
+const addLike = async(productId) => {
 
+  await likeApi(productId);
+
+}
+
+const color = props.liked;
 
 
   return (
@@ -30,14 +37,18 @@ function ProductComponent(props) {
       </div>
 
       <div style={{marginTop: '-5px'}}>
-      <span className="right floated ">
-        <i className="  like  icon"></i>
-        {props.product.likesCount}
-      </span>
-      <span className="left floated">
-      <i className="comment icon "></i>
-      {props.product.rating}
-      </span>
+
+          <span className="right floated " onClick={()=>{addLike(props.product._id)}}>
+            <i className={`like  icon ${color}`}></i>
+            {props.product.likesCount}
+          </span>
+
+
+          <span className="left floated">
+          <i className="comment icon "></i>
+          {props.product.rating}
+          </span>
+          
       </div>
 
       

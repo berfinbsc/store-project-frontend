@@ -19,6 +19,7 @@ export const endpoints={
     increaseQuantity : "/increaseQuantity",
     deleteFromCart : "/deleteFromCart",
     user : "/user",
+    like : "/like",
 }
 
 
