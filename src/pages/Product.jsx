@@ -19,8 +19,11 @@ const Product = ()=> {
           getAllProducts()
           .then((data)=>{
             setProducts(data.data.products);
-            console.log(data)})
-          .catch((error)=>{console.log(error)})
+            console.log(data)
+          })
+          .catch((error)=>{
+            console.log(error)
+          })
         
       },[])
 
@@ -30,13 +33,15 @@ const Product = ()=> {
  
 useEffect(()=>{
 
- async ()=>{
+ const checkUserSession =async()=>{
 
   const userDataString =  await localStorage.getItem('user')
-  if(userDataString){
-    const userData = await JSON.parse(userDataString);
+console.log(userDataString);
+const userData = await JSON.parse(userDataString);
+
+  if(userData){
+    console.log("xxx : : " + userData);
     dispatch(loginReduc(userData))
-    console.log(userData);
   }
   else{
     console.log("not logined");
@@ -44,19 +49,18 @@ useEffect(()=>{
   }
 
  }
+ checkUserSession();
 
- },[])
+ },[dispatch])
 
-  const {user,isAuthenticated} =useSelector(store=>store.user);
-  const userLiked = user.liked;
-
+  const {user,isAuthenticated,userLiked} = useSelector(store=>store.user);
 
 
 
 
 
 const isLike = (id)=>{
-
+console.log(localStorage.getItem('userLiked'));
   if(user && userLiked && userLiked.includes(id)){
     return 'orange';
   }
@@ -90,7 +94,7 @@ const isLike = (id)=>{
     {products.map((product) => (
 
      <div className="ui column" key={product._id}>  
-        <ProductComponent product={product} userLikes={isLike(product._id)} />
+        <ProductComponent product={product} like={isLike(product._id)} />
       </div>
     ))}
 

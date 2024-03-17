@@ -5,8 +5,9 @@ const  About =  ()=> {
  // const res = await getAbout();
   //console.log(res)
 const [msg,setMsg]=useState();
-useEffect(async()=>{
+useEffect(()=>{
 
+const aboutt =async()=>{
   try {
     const resp = await getAbout()
     setMsg(resp)
@@ -14,6 +15,9 @@ useEffect(async()=>{
     console.log("GET ABOUT ERROR")
     
   }
+}
+
+aboutt();
 
 },[])
 

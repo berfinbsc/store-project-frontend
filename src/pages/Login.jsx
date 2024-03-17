@@ -27,9 +27,10 @@ const handlerSubmit = async (e) => {
 
   try {
         await login(email, password);
-        const user = await getUser();
-        await  dispatch(loginReduc(user));
-        navigate('/products');
+        const user =  await getUser();
+        console.error(user);
+        await dispatch(loginReduc(user));
+       await navigate('/products');
   } catch (err) {
         console.error('Login error:', err);
   }

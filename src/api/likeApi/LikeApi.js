@@ -15,9 +15,9 @@ const likeApi = async(productId) => {
                 Authorization:`Bearer ${token}`
             }
         });
-
+        console.log(res.data);
         console.log(res);
-        return res;
+        return res.data;
 
         }
         catch (error) {

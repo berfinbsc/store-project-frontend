@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react' 
 import { useDispatch, useSelector } from 'react-redux'
 import { store } from '../store/Store';
-import { loginReduc } from '../store/user/UserSlice';
+import { logOutReduc, loginReduc } from '../store/user/UserSlice';
 import { Link } from 'react-router-dom';
 
 const Log = () => {
@@ -19,7 +19,8 @@ useEffect(()=>{
       console.log(userData);
     }
     else{
-      console.log("not logined");
+      dispatch(logOutReduc()); 
+      
     }},[dispatch])
 
 
@@ -28,7 +29,8 @@ useEffect(()=>{
 const handleLogOut =() => {
   localStorage.removeItem('token');
     localStorage.removeItem('user');
-    dispatch(loginReduc());
+    console.log(localStorage.getItem('user'));  
+    dispatch(logOutReduc());
 }
 
 

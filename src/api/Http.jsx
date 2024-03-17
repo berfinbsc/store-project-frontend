@@ -4,24 +4,43 @@ import { endpoints, instance } from "./Api"
 
 
 
-
 export const getUser=async()=>{
+
   const token = await localStorage.getItem('token')
   console.log("get token from session storage"+token);
     if(!token){
         return console.log("token yok : : ");
     }
     try { 
-        const data = await instance.get(endpoints.user, {
-            headers: {
-                Authorization:`Bearer ${token}`
+            const data = await instance.get(endpoints.user, {
+                headers: {
+                    Authorization:`Bearer ${token}`
+                }
+            })
+
+            const user = data.data;
+            console.log(user);
+
+
+            if(user){
+                console.log("user from getUser "+ user);
+                 localStorage.setItem('user',JSON.stringify(user))
+                 const getUser = localStorage.getItem('user');
+                 const getUser2 = JSON.parse(getUser);
+
+                    if(getUser2){
+                      console.log("get user localstorage    : :" + getUser2)
+                      return getUser2;
+
+                    }
+                    else{
+                      console.log("get user localstorage hatası : : ")
+                    }
             }
-        })
-        const user = data.data;
-        console.log(user);
-        await localStorage.removeItem('user')
-        await localStorage.setItem('user', JSON.stringify(user));
-        return user;
+            else{
+              return null;
+            }
+
     } catch (error) {
         console.log("getUser işleminde hata : :" + error);                                   
 }
@@ -33,26 +52,20 @@ export const getUser=async()=>{
 
 
 
-export const login=async(email,password)=>{
 
-  try {
-  instance.post(endpoints.login,{email,password}).then(resp=>{
-    if(!resp.data.token){
-      throw new Error("Giriş yapılamadı : "+ resp.data.message )
+
+  export const login = async (email, password) => {
+    try {
+      const resp = await instance.post(endpoints.login, { email, password });
+      if (!resp.data.token) {
+        throw new Error("Giriş yapılamadı : " + resp.data.message);
+      }
+      console.log("Login : " + resp.data.token);
+      localStorage.setItem('token', resp.data.token);
+    } catch (error) {
+      console.log("Login işleminde hata : :" + error);
     }
-    console.log("Login : "+resp.data.token);
-    localStorage.setItem('token',resp.data.token);
-  })
-
-     
-  } catch (error) {
-    console.log("Login işleminde hata : :" + error);
-
-  }}
-
-
-
-
+  };
 
 
 

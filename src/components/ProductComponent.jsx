@@ -1,26 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Log from './Log'
 import likeApi from '../api/likeApi/LikeApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginReduc } from '../store/user/UserSlice';
+import { addLiked, loginReduc, removeLiked } from '../store/user/UserSlice';
 import { store } from '../store/Store';
+import { useNavigate } from 'react-router-dom';
 
 function ProductComponent(props) {
 
+  const navigate = useNavigate();
 
-  const color = props.userLikes || ""
   const dispatch = useDispatch();
-  const {user,isAuthenticated} =useSelector(store=>store.user);
+  const {user,isAuthenticated,userLiked} =useSelector(store=>store.user);
+const [likeIcon,setLikeIcon] = useState(props.like)
+
+
 
   const addLike = async(productId) => {
-    const likes = await likeApi(productId);
-    user.liked=likes
-    dispatch(loginReduc(user))
-    await localStorage.setItem('user', JSON.stringify(user));
+if(isAuthenticated){
 
+  if(likeIcon === 'orange'){
+    setLikeIcon('gray');
+    const likeArray = await likeApi(productId);
+    dispatch(removeLiked(likeArray));
+    localStorage.setItem("like", likeArray);
+  }
+  
+  else if(likeIcon === 'gray'){
+    setLikeIcon('orange');
+   const likeArray = await likeApi(productId);
+    dispatch(addLiked(likeArray));
+    localStorage.setItem("like", likeArray);
 
   }
+}
+else{
+  navigate('/login')
+}
+}
 
 
 
@@ -50,7 +68,7 @@ function ProductComponent(props) {
       <div style={{marginTop: '-5px'}}>
 
           <span className="right floated " onClick={()=>{addLike(props.product._id)}}>
-            <i className={`like  icon ${color}`}></i>
+            <i className={`like  icon ${likeIcon}`}></i>
             {props.product.likesCount}
           </span>
 
