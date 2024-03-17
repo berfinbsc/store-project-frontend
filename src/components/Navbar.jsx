@@ -10,7 +10,6 @@ const Navbar = () => {
   return (
 
         <nav className='Navbar'>
-                      <Log></Log>
 
           <Link to='/'>Home</Link> 
           <Link to='/about'>About</Link>

@@ -26,13 +26,12 @@ const handlerSubmit = async (e) => {
   }
 
   try {
-    await login(email, password);
-    const user = await getUser();
-    console.log(user);
-   await dispatch(loginReduc(user));
-   navigate('/products');
+        await login(email, password);
+        const user = await getUser();
+        await  dispatch(loginReduc(user));
+        navigate('/products');
   } catch (err) {
-    console.error('Login error:', err);
+        console.error('Login error:', err);
   }
 };
 

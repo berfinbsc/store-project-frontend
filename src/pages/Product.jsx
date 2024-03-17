@@ -2,33 +2,64 @@ import React, { useEffect, useState } from 'react'
 import { getAllProducts } from '../api/Http';
 import ProductComponent from '../components/ProductComponent';
 import { Link } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { store } from '../store/Store';
+import { logOutReduc, loginReduc } from '../store/user/UserSlice';
+import Log from '../components/Log';
+
+
+
 const Product = ()=> {
 
-  const [products,setProducts] = useState([]);
-const {user,isAuthenticated} =useSelector(store=>store.user);
+    const dispatch = useDispatch();
+    const [products,setProducts] = useState([]);
+
+      useEffect(()=>{
+
+          getAllProducts()
+          .then((data)=>{
+            setProducts(data.data.products);
+            console.log(data)})
+          .catch((error)=>{console.log(error)})
+        
+      },[])
 
 
+
+
+ 
 useEffect(()=>{
-getAllProducts()
-.then((data)=>{
-  setProducts(data.data.products);
-   console.log(data)})
-.catch((error)=>{console.log(error)})
 
-},[])
+ async ()=>{
+
+  const userDataString =  await localStorage.getItem('user')
+  if(userDataString){
+    const userData = await JSON.parse(userDataString);
+    dispatch(loginReduc(userData))
+    console.log(userData);
+  }
+  else{
+    console.log("not logined");
+    dispatch(logOutReduc());
+  }
+
+ }
+
+ },[])
+
+  const {user,isAuthenticated} =useSelector(store=>store.user);
+  const userLiked = user.liked;
+
+
 
 
 
 
 const isLike = (id)=>{
 
-  if(user && user.liked && user.liked.includes(id)){
-    console.log(true)
+  if(user && userLiked && userLiked.includes(id)){
     return 'orange';
   }
-  console.log(false)
 
   return 'gray';
 }
@@ -44,9 +75,8 @@ const isLike = (id)=>{
 
   return (
 <div className="">
+<Log></Log>
 
-{user.userName }
-{user.liked}
 
 <div className="ui button right floated" >
 
@@ -60,7 +90,7 @@ const isLike = (id)=>{
     {products.map((product) => (
 
      <div className="ui column" key={product._id}>  
-        <ProductComponent product={product} liked={isLike(product._id)} />
+        <ProductComponent product={product} userLikes={isLike(product._id)} />
       </div>
     ))}
 

@@ -19,9 +19,9 @@ export const getUser=async()=>{
         })
         const user = data.data;
         console.log(user);
+        await localStorage.removeItem('user')
         await localStorage.setItem('user', JSON.stringify(user));
         return user;
-
     } catch (error) {
         console.log("getUser işleminde hata : :" + error);                                   
 }
