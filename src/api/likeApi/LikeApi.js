@@ -16,7 +16,6 @@ const likeApi = async(productId) => {
             }
         });
         console.log(res.data);
-        console.log(res);
         return res.data;
 
         }

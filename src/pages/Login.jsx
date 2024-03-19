@@ -4,7 +4,7 @@ import { Button, Form, Input } from 'semantic-ui-react';
 import { getUser, login } from '../api/Http'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginReduc } from '../store/user/UserSlice';
+import { addLiked, loginReduc } from '../store/user/UserSlice';
 
 const Login = ()=> {
 const [email,setEmail]=useState('');
@@ -28,10 +28,17 @@ const handlerSubmit = async (e) => {
   try {
         await login(email, password);
         const user =  await getUser();
-        console.error(user);
+        const liked = user.liked;
+        localStorage.setItem("liked", JSON.stringify(liked));
+
+        console.log(liked);
+        console.log(user);
+
+        await dispatch(addLiked(liked));
         await dispatch(loginReduc(user));
-       await navigate('/products');
-  } catch (err) {
+        await navigate('/products');
+ 
+      } catch (err) {
         console.error('Login error:', err);
   }
 };

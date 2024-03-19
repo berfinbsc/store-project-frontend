@@ -10,6 +10,7 @@ import Log from '../components/Log';
 
 
 const Product = ()=> {
+  const {user,isAuthenticated,userLiked} = useSelector(store=>store.user);
 
     const dispatch = useDispatch();
     const [products,setProducts] = useState([]);
@@ -35,32 +36,34 @@ useEffect(()=>{
 
  const checkUserSession =async()=>{
 
-  const userDataString =  await localStorage.getItem('user')
-console.log(userDataString);
-const userData = await JSON.parse(userDataString);
+        const userData =  await localStorage.getItem('user')
+        userData = await JSON.parse(userData);
+        const likeArray = await localStorage.getItem('liked')
+        likeArray= await JSON.parse(likeArray)
 
-  if(userData){
-    console.log("xxx : : " + userData);
-    dispatch(loginReduc(userData))
-  }
-  else{
-    console.log("not logined");
-    dispatch(logOutReduc());
-  }
+        console.log(userData);
+        console.log(likeArray);
 
- }
+        if(userData && userLiked){
+          dispatch(loginReduc(userData))
+          dispatch(addLiked(likeArray))
+        }
+        else{
+          console.log("not logined");
+          dispatch(logOutReduc());
+        }}
+
  checkUserSession();
 
  },[dispatch])
 
-  const {user,isAuthenticated,userLiked} = useSelector(store=>store.user);
 
 
 
 
 
 const isLike = (id)=>{
-console.log(localStorage.getItem('userLiked'));
+
   if(user && userLiked && userLiked.includes(id)){
     return 'orange';
   }
