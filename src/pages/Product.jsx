@@ -4,16 +4,18 @@ import ProductComponent from '../components/ProductComponent';
 import { Link } from 'react-router-dom';
 import {  useDispatch, useSelector } from 'react-redux';
 import { store } from '../store/Store';
-import { logOutReduc, loginReduc } from '../store/user/UserSlice';
+import { addLiked, logOutReduc, loginReduc } from '../store/user/UserSlice';
 import Log from '../components/Log';
 
 
 
 const Product = ()=> {
-  const {user,isAuthenticated,userLiked} = useSelector(store=>store.user);
-
+ 
     const dispatch = useDispatch();
     const [products,setProducts] = useState([]);
+    const {user,isAuthenticated,userLiked} = useSelector(store=>store.user);
+    console.log(userLiked);
+
 
       useEffect(()=>{
 
@@ -37,16 +39,16 @@ useEffect(()=>{
  const checkUserSession =async()=>{
 
         const userData =  await localStorage.getItem('user')
-        userData = await JSON.parse(userData);
+       const  userData2 = await JSON.parse(userData);
         const likeArray = await localStorage.getItem('liked')
-        likeArray= await JSON.parse(likeArray)
+       const  likeArray2= await JSON.parse(likeArray)
 
-        console.log(userData);
-        console.log(likeArray);
+        console.log(userData2);
+        console.log(likeArray2);
 
         if(userData && userLiked){
-          dispatch(loginReduc(userData))
-          dispatch(addLiked(likeArray))
+         await dispatch(loginReduc(userData2))
+         await dispatch(addLiked(likeArray2))
         }
         else{
           console.log("not logined");
@@ -55,7 +57,7 @@ useEffect(()=>{
 
  checkUserSession();
 
- },[dispatch])
+ },[])
 
 
 
@@ -64,7 +66,7 @@ useEffect(()=>{
 
 const isLike = (id)=>{
 
-  if(user && userLiked && userLiked.includes(id)){
+  if(user && userLiked.includes(id)){
     return 'orange';
   }
 
