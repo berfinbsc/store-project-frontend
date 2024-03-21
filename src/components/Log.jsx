@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { store } from '../store/Store';
 import { logOutReduc, loginReduc } from '../store/user/UserSlice';
 import { Link } from 'react-router-dom';
+import { LogOut } from '../api/Http';
 
 const Log = () => {
 const dispatch = useDispatch();
@@ -27,10 +28,14 @@ useEffect(()=>{
 
     
 const handleLogOut =() => {
-  localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    console.log(localStorage.getItem('user'));  
+ try {
+  LogOut().then(()=>{
     dispatch(logOutReduc());
+    console.log("LogOut işlemi başarılı")
+  })
+ } catch (error) {
+  console.log("LogOut işleminde hata from handleLogOut : :" + error);
+ }  
 }
 
 

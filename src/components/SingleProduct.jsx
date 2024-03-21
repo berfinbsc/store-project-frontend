@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { getOneProduct } from '../api/Http';
 import { addToCart } from '../api/CartApi.jsx/CartApi';
+import { getOneProduct } from '../api/Http';
 
-export default function SingleProduct() {
+export const SingleProduct=() =>{
 
   const  {productId} = useParams();
   const id = productId;
 const [product,setProduct] = useState({});
-console.log("k : : " + productId)
 
 
 const addCart = () => {
@@ -17,7 +16,8 @@ const addCart = () => {
   try {
 
     addToCart(productId)
-    .then((data)=>{console.log(data); console.log("sepete eklendi")})
+    .then((data)=>{
+      console.log(data); console.log("sepete eklendi")})
   } catch (error) {
     console.log("erişim başarısız:", error);
   }
@@ -31,7 +31,11 @@ useEffect(()=>{
 
 try {
   getOneProduct(productId)
-.then((data)=>{console.log(data.data.product); setProduct(data.data.product); })
+.then((data)=>{
+  console.log(data.data.product);
+  const product = data.data.product;
+   setProduct(product);
+   })
 
 } catch (error) {
   console.log("erişim başarısız:", error);

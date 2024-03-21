@@ -18,8 +18,6 @@ const [likeIcon,setLikeIcon] = useState(props.like)
 
 
   const addLike = async(productId) => {
-    console.log(isAuthenticated);
-    console.log(user);
 if(isAuthenticated && user){
 
   if(likeIcon === 'orange'){
@@ -51,6 +49,7 @@ if(isAuthenticated && user){
   }
 }
 else{
+  console.log("user is not authenticated please login");
   navigate('/login')
 }
 }

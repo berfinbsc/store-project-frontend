@@ -26,17 +26,16 @@ const handlerSubmit = async (e) => {
   }
 
   try {
-        await login(email, password);
-        const user =  await getUser();
-        const liked = user.liked;
-        localStorage.setItem("liked", JSON.stringify(liked));
-
-        console.log(liked);
+        await login(email, password)
+        const user = await getUser()
         console.log(user);
-
-        await dispatch(addLiked(liked));
         await dispatch(loginReduc(user));
-        await navigate('/products');
+        const liked = await user.liked;
+        console.log(liked);
+        await dispatch(addLiked(liked));
+        navigate('/products');
+      
+        
  
       } catch (err) {
         console.error('Login error:', err);

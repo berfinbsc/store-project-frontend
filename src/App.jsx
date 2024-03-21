@@ -6,12 +6,12 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import ProductLayout from './pages/ProductLayout'
 import Product from './pages/Product'
-import SingleProduct from './components/SingleProduct'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import About from './pages/About'
 import Cart from './pages/Cart'
 import 'semantic-ui-css/semantic.min.css';
+import { SingleProduct } from './components/SingleProduct'
 
 
 

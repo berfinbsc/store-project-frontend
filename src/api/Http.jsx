@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import { endpoints, instance } from "./Api"
+import { addLiked, logOutReduc, loginReduc } from "../store/user/UserSlice";
 
 
 
@@ -7,43 +9,33 @@ import { endpoints, instance } from "./Api"
 export const getUser=async()=>{
 
   const token = await localStorage.getItem('token')
-  console.log("get token from session storage"+token);
+  console.log("get token from session storage : : "+token);
     if(!token){
         return console.log("token yok : : ");
     }
     try { 
-            const data = await instance.get(endpoints.user, {
+                const resp = await instance.get(endpoints.user, {
                 headers: {
-                    Authorization:`Bearer ${token}`
+                Authorization:`Bearer ${token}`
                 }
-            })
-
-            const user = data.data;
-            console.log(user);
-
-
-            if(user){
-                console.log("user from getUser "+ user);
-                 localStorage.setItem('user',JSON.stringify(user))
-                 const getUser = localStorage.getItem('user');
-                 const getUser2 = JSON.parse(getUser);
-
-                    if(getUser2){
-                      console.log("get user localstorage    : :" + getUser2)
-                      return getUser2;
-
-                    }
-                    else{
-                      console.log("get user localstorage hatası : : ")
-                    }
-            }
-            else{
-              return null;
-            }
+            });
+            console.log(resp);
+            console.log(resp.data);
+            const user= await resp.data;
+            console.log("user from getUser "+ user);
+            await localStorage.setItem('user',JSON.stringify(user))
+            const liked = await user.liked;
+            await localStorage.setItem('liked',JSON.stringify(liked))
+            console.log("liked from getUser "+ liked);
+            return user;
+          
 
     } catch (error) {
         console.log("getUser işleminde hata : :" + error);                                   
 }
+
+
+
 }
 
 
@@ -57,11 +49,10 @@ export const getUser=async()=>{
   export const login = async (email, password) => {
     try {
       const resp = await instance.post(endpoints.login, { email, password });
-      if (!resp.data.token) {
-        throw new Error("Giriş yapılamadı : " + resp.data.message);
-      }
-      console.log("Login : " + resp.data.token);
-      localStorage.setItem('token', resp.data.token);
+      console.log(resp);
+      const token = resp.data.token;
+      localStorage.setItem('token', token);
+      console.log("Login : " + token);
     } catch (error) {
       console.log("Login işleminde hata : :" + error);
     }
@@ -99,12 +90,27 @@ try {
 } catch (error) {
     console.log("erişim başarısız:", error);
 
-}
+}}
 
 
 
+export const LogOut = async () => {
 
-}
+  try {
+
+    await localStorage.removeItem('token');
+    console.log("token removed");
+
+    await localStorage.removeItem('user');
+    console.log("user removed");
+
+    await localStorage.removeItem('liked');
+    console.log("liked removed");
+
+  } catch (error) {
+    console.error("LogOut işleminde hata:", error);
+  }
+};
 
 
 
