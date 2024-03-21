@@ -18,33 +18,33 @@ const [likeIcon,setLikeIcon] = useState(props.like)
 
 
   const addLike = async(productId) => {
-if(isAuthenticated && user){
+if(isAuthenticated){
+
+
+
 
   if(likeIcon === 'orange'){
     setLikeIcon('gray');
-
-    const likeArray = await likeApi(productId);
-    console.log(likeArray);
-  
-    localStorage.removeItem('userLiked');
-    await localStorage.setItem("like", JSON.stringify(likeArray));
+   const likeArray = await likeApi(productId);
+    console.log("likeArray :: " + likeArray);
+    await localStorage.setItem("liked", JSON.stringify(likeArray));
     await dispatch(addLiked(likeArray));
-    console.log(userLiked);
-    
-    console.log(localStorage.getItem("like"));
+    console.log("userLiked :: " + userLiked);
+    console.log("locstor liked :: " + localStorage.getItem("liked"));
   }
   
-  else if(likeIcon === 'gray'){
-    setLikeIcon('orange');
-   const likeArray = await likeApi(productId);
-   console.log(likeArray);
-   
-    localStorage.removeItem("userLiked");
-    localStorage.setItem("like", JSON.stringify(likeArray));
-    await dispatch(addLiked(likeArray));
-    console.log(userLiked);
 
-    console.log(localStorage.getItem("like"));
+
+
+  else if(likeIcon === 'gray'){
+
+    setLikeIcon('orange');
+    const likeArray = await likeApi(productId);
+    console.log("likeArray :: " + likeArray);
+    await localStorage.setItem("liked", JSON.stringify(likeArray));
+    await dispatch(addLiked(likeArray));
+    console.log("userLiked :: " + userLiked);
+    console.log("locstor liked :: " + localStorage.getItem("liked"));
 
   }
 }

@@ -27,12 +27,13 @@ useEffect(()=>{
 
 
     
-const handleLogOut =() => {
+const handleLogOut = async() => {
  try {
-  LogOut().then(()=>{
-    dispatch(logOutReduc());
+  await LogOut()
+   await dispatch(logOutReduc());
+   await dispatch(userLiked([]));
     console.log("LogOut işlemi başarılı")
-  })
+  
  } catch (error) {
   console.log("LogOut işleminde hata from handleLogOut : :" + error);
  }  

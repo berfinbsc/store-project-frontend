@@ -14,9 +14,44 @@ const Product = ()=> {
     const dispatch = useDispatch();
     const [products,setProducts] = useState([]);
     const {user,isAuthenticated,userLiked} = useSelector(store=>store.user);
-    console.log(userLiked);
-    console.log(user);
-    console.log(isAuthenticated);
+   
+
+    useEffect(()=>{
+
+      const checkUserSession =async()=>{
+     
+    try {
+      
+          const userData =  await localStorage.getItem('user')
+          const  userLocal =  JSON.parse(userData);
+          const likesData = await localStorage.getItem('liked')
+          const  likesLocal=  JSON.parse(likesData)
+
+          console.log(userLocal);
+          console.log(likesLocal);
+
+          if(userLocal){
+            await dispatch(loginReduc(userLocal))
+            await dispatch(addLiked(likesLocal))
+            console.log(user)
+            console.log(userLiked)
+          
+          }
+          else{
+            console.log("not logined");
+          }
+
+
+    } catch (error) {
+          console.log("user data fetching error : : " + error);
+}
+
+          }
+     
+      checkUserSession();
+     
+      },[dispatch])
+
 
 
       useEffect(()=>{
@@ -36,29 +71,7 @@ const Product = ()=> {
 
 
  
-useEffect(()=>{
 
- const checkUserSession =async()=>{
-
-        const userData =  await localStorage.getItem('user')
-       const  userLocal = await JSON.parse(userData);
-        const likesData = await localStorage.getItem('liked')
-       const  likesLocal= await JSON.parse(likesData)
-
-        console.log(userLocal);
-        console.log(likesLocal);
-
-        if(userLocal){
-         await dispatch(loginReduc(userLocal))
-         await dispatch(addLiked(likesLocal))
-        }
-        else{
-          console.log("not logined");
-        }}
-
- checkUserSession();
-
- },[])
 
 
 
@@ -66,12 +79,13 @@ useEffect(()=>{
 
 
 const isLike = (id)=>{
+if(isAuthenticated && userLiked){
+ return userLiked.includes(id) ? 'orange' : 'gray';
+  
 
-  if(user && userLiked.includes(id)){
-    return 'orange';
-  }
+}
+return 'gray';
 
-  return 'gray';
 }
 
 
@@ -100,6 +114,7 @@ const isLike = (id)=>{
     {products.map((product) => (
 
      <div className="ui column" key={product._id}>  
+     
         <ProductComponent product={product} like={isLike(product._id)} />
       </div>
     ))}
