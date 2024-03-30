@@ -20,6 +20,7 @@ export const endpoints={
     deleteFromCart : "/deleteFromCart",
     user : "/user",
     like : "/like",
+    filters : "/filters",
 }
 
 

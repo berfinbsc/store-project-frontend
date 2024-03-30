@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { addToCart } from '../api/CartApi.jsx/CartApi';
 import { getOneProduct } from '../api/Http';
+import { addToCart } from '../api/CartApi';
 
 export const SingleProduct=() =>{
 

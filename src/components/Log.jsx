@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react' 
 import { useDispatch, useSelector } from 'react-redux'
 import { store } from '../store/Store';
-import { logOutReduc, loginReduc } from '../store/user/UserSlice';
+import { addLiked, logOutReduc, loginReduc} from '../store/user/UserSlice';
 import { Link } from 'react-router-dom';
 import { LogOut } from '../api/Http';
+import Product from '../pages/Product';
 
 const Log = () => {
 const dispatch = useDispatch();
@@ -29,11 +30,16 @@ useEffect(()=>{
     
 const handleLogOut = async() => {
  try {
-  await LogOut()
+  await LogOut();
+  console.log("a")
    await dispatch(logOutReduc());
-   await dispatch(userLiked([]));
+   console.log("b")
+
+   await dispatch(addLiked([]));
+   
     console.log("LogOut işlemi başarılı")
-  
+  return <Product/>
+
  } catch (error) {
   console.log("LogOut işleminde hata from handleLogOut : :" + error);
  }  

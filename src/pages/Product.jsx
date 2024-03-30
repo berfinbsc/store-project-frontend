@@ -6,6 +6,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { addLiked, logOutReduc, loginReduc } from '../store/user/UserSlice';
 import Log from '../components/Log';
 import { store } from '../store/Store';
+import Filter from '../components/Filter';
 
 
 
@@ -17,9 +18,7 @@ const Product = ()=> {
    
 
     useEffect(()=>{
-
-      const checkUserSession =async()=>{
-     
+      const checkUserSession =async()=>{    
     try {
       
           const userData =  await localStorage.getItem('user')
@@ -36,36 +35,31 @@ const Product = ()=> {
             console.log(user)
             console.log(userLiked)
           
-          }
-          else{
+          } else{
             console.log("not logined");
           }
 
+      } catch (error) {
+                console.log("user data fetching error : : " + error);
+      } }
+            checkUserSession();
+            },[dispatch])
 
-    } catch (error) {
-          console.log("user data fetching error : : " + error);
-}
 
-          }
-     
-      checkUserSession();
-     
-      },[dispatch])
 
 
 
       useEffect(()=>{
-
           getAllProducts()
           .then((data)=>{
             setProducts(data.data.products);
             console.log(data)
+            console.log("LOGOUT TETıKLEMESı BASARıSıZ RENDER GEREKLı")
           })
           .catch((error)=>{
             console.log(error)
-          })
-        
-      },[])
+          })  
+      },[logOutReduc])
 
 
 
@@ -93,42 +87,34 @@ return 'gray';
 
 
 
-
-
-
-
   return (
-<div className="">
-<Log></Log>
+    <div className="">
 
+      <Log></Log>
+      <Filter/>
+      
+        <div className="ui button right floated" >
+            <Link to="/cart">
+            <i className="shop icon"></i>
+            </Link>
+        </div>
+      
+        <div className="ui four column relaxed grid">
+              {products.map((product) => (
+                <div className="ui column" key={product._id}>  
+                    <ProductComponent product={product} like={isLike(product._id)} />
+                </div>
+              ))}
 
-<div className="ui button right floated" >
-
-  <Link to="/cart">
-  <i className="shop icon"></i>
-  </Link>
-</div>
-
-
-<div className="ui four column relaxed grid">
-    {products.map((product) => (
-
-     <div className="ui column" key={product._id}>  
-     
-        <ProductComponent product={product} like={isLike(product._id)} />
-      </div>
-    ))}
-
-
-    
-  </div>
-
-
-</div>
-
-  
+          </div>  
+    </div>
 
   )
+
+
+
+
+
 }
 
 export default Product;

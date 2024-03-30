@@ -1,4 +1,4 @@
-import { endpoints, instance } from "../Api"
+import { endpoints, instance } from "./Api"
 
 
   

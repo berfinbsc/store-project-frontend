@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { deleteFromCart, getCart } from '../api/CartApi.jsx/CartApi'
+import { deleteFromCart, getCart } from '../api/CartApi'
 import CartItemPay from '../components/CartItemPay'
 
 export default function Cart() {

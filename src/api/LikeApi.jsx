@@ -1,6 +1,6 @@
 //rafc
 import React from 'react'
-import { endpoints, instance } from "../Api"
+import { endpoints, instance } from "./Api"
 
 
 

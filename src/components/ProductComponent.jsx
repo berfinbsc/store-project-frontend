@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Log from './Log'
-import likeApi from '../api/likeApi/LikeApi';
+import likeApi from '../api/LikeApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLiked, loginReduc, removeLiked } from '../store/user/UserSlice';
 import { store } from '../store/Store';
@@ -13,6 +13,7 @@ function ProductComponent(props) {
 
   const dispatch = useDispatch();
   const {user,isAuthenticated,userLiked} =useSelector(store=>store.user);
+  const [likeCount,setLikeCount] = useState(props.product.likesCount);
 const [likeIcon,setLikeIcon] = useState(props.like)
 
 
@@ -20,31 +21,29 @@ const [likeIcon,setLikeIcon] = useState(props.like)
   const addLike = async(productId) => {
 if(isAuthenticated){
 
-
-
-
   if(likeIcon === 'orange'){
-    setLikeIcon('gray');
    const likeArray = await likeApi(productId);
+   console.log("userLiked :: " + userLiked);
+    console.log("locstor liked :: " + localStorage.getItem("liked"));
     console.log("likeArray :: " + likeArray);
     await localStorage.setItem("liked", JSON.stringify(likeArray));
     await dispatch(addLiked(likeArray));
-    console.log("userLiked :: " + userLiked);
-    console.log("locstor liked :: " + localStorage.getItem("liked"));
+    setLikeIcon('gray');
+    setLikeCount(likeCount -1);
+    
   }
   
-
-
-
   else if(likeIcon === 'gray'){
 
-    setLikeIcon('orange');
     const likeArray = await likeApi(productId);
+    console.log("userLiked :: " + userLiked);
+    console.log("locstor liked :: " + localStorage.getItem("liked"));
     console.log("likeArray :: " + likeArray);
     await localStorage.setItem("liked", JSON.stringify(likeArray));
     await dispatch(addLiked(likeArray));
-    console.log("userLiked :: " + userLiked);
-    console.log("locstor liked :: " + localStorage.getItem("liked"));
+    setLikeIcon('orange');
+    setLikeCount(likeCount + 1);
+   
 
   }
 }
@@ -53,6 +52,12 @@ else{
   navigate('/login')
 }
 }
+
+
+
+
+
+
 
 
 
@@ -83,7 +88,7 @@ else{
 
           <span className="right floated " onClick={()=>{addLike(props.product._id)}}>
             <i className={`like  icon ${likeIcon}`}></i>
-            {props.product.likesCount}
+            {likeCount}
           </span>
 
 

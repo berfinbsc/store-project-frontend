@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { deleteFromCart, increaseQuantity, reduceQuantity } from '../api/CartApi.jsx/CartApi'
+import { increaseQuantity, reduceQuantity } from '../api/CartApi';
 
 
 function CartItemPay(props) {
@@ -14,7 +14,10 @@ console.log(props.product);
 const reduce = ()=>{
     reduceQuantity(product.productId)
    .then((data)=>{ 
-    setProduct(prevProduct =>({...prevProduct ,quantity : data.data.quantity , total : data.data.total
+    setProduct(prevProduct =>({
+      ...prevProduct ,
+      quantity : data.data.quantity , 
+      total : data.data.total
     }))
   })
   .then(subTotal)

@@ -12,10 +12,10 @@ import About from './pages/About'
 import Cart from './pages/Cart'
 import 'semantic-ui-css/semantic.min.css';
 import { SingleProduct } from './components/SingleProduct'
+  
 
 
-
-function App() {
+function App() {  
 
 
   
