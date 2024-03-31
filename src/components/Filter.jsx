@@ -6,7 +6,13 @@ import { getFilters } from '../api/FilterApi';
 import FilterItem from './FilterItem';
 
 const Filter = () => {
-
+    const [respFilter,setRespFilter] = useState([]);
+    const [filters,setFilters] = useState([
+        {
+         category :"",
+         values:[],
+        }
+    ]);
 
     useEffect(()=>{
         const filterFromApi = async()=>{
@@ -19,46 +25,52 @@ const Filter = () => {
     
 
 
-    const [respFilter,setRespFilter] = useState([]);
-    const [filters,setFilters] = useState([
-        {price:[]},
-       { brand:[]},
-       { rating:[]},
-        {gender:[]}
-        
-     ] );
+ 
+/*
+   const handleCheckBoxChange = (category, value) => {
+  setFilters(prevState=>{
+    const index = prevState.findIndex(filter => filter.category === category)
+    console.log(index)
+    if(index===-1){
+       [...prevState,{category : category,values : value}]
+         console.log(filters);
 
-
-     const handleCheckBoxChange = (category, value) => {
-        
-        const newFilters = [...filters];
-        const index = newFilters.findIndex(filter => filter === category);
-        if (index === -1) {
-                console.log("böyle bir kategori yok");
+    }else if(index!==-1 && index!== "undefined"){
+        if(prevState[index].values.includes(value)){
+          prevState[index].values = prevState[index].values.filter(filterValue=>filterValue!==value)
+          console.log(filters)
         }
-         else {
-                if(newFilters[index].includes(value)) {
-                newFilters[index].pop(value);
-                setFilters(newFilters);
-                console.log("silindi");
-                console.log(newFilters);
-                }
-                else{
-                    newFilters[index].push(value);
-                    setFilters(newFilters);
-                    console.log("eklendi");
-                    console.log(newFilters);
-                }
-        } 
+        else{
+          prevState[index].values.push(value)
+          console.log(filters)
+        }}})    }
+*/
 
-       
+  
+
+
+
+
+
+    const handleCheckBoxChange = (category, value) => {
+        setFilters(prevFilters => {
+          const newFilters = [...prevFilters]; 
+          const index = newFilters.findIndex(f => f.category === category);
+      
+          if(index === -1) {
+            newFilters.push({category, values: [value]});
+          } else {
+            if(newFilters[index].values.includes(value)) {
+              newFilters[index].values = newFilters[index].values.filter(v => v !== value);
+            } else {
+              newFilters[index].values.push(value);
+            }
+          }
+      
+          console.log(newFilters); // yeni state
+          return newFilters; 
+        });
       }
-
-
-
-
-
-
 
 
 
