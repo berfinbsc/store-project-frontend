@@ -7,6 +7,7 @@ import { addLiked, logOutReduc, loginReduc } from '../store/user/UserSlice';
 import Log from '../components/Log';
 import { store } from '../store/Store';
 import Filter from '../components/Filter';
+import { Grid } from 'semantic-ui-react';
 
 
 
@@ -88,25 +89,59 @@ return 'gray';
 
 
   return (
-    <div className="">
+    <div >
 
       <Log></Log>
-      <Filter/>
       
+
+      <Grid container>
+
+<Grid.Row>
+
+  <Grid.Column width={4}>
+
+    <Filter />
+
+  </Grid.Column>
+
+  <Grid.Column width={12}>
+
+    <Grid columns={3}>
+
+      {products.map((product, index) => (
+
+        <Grid.Column key={product._id}>
+
+          
+
+            <ProductComponent product={product} like={isLike(product._id)} />
+
+         
+
+        </Grid.Column>
+
+      ))}
+
+    </Grid>
+
+  </Grid.Column>
+
+</Grid.Row>
+
+</Grid>
+
+
+
+
+
+
         <div className="ui button right floated" >
             <Link to="/cart">
             <i className="shop icon"></i>
             </Link>
         </div>
       
-        <div className="ui four column relaxed grid">
-              {products.map((product) => (
-                <div className="ui column" key={product._id}>  
-                    <ProductComponent product={product} like={isLike(product._id)} />
-                </div>
-              ))}
-
-          </div>  
+        
     </div>
 
   )
@@ -118,3 +153,25 @@ return 'gray';
 }
 
 export default Product;
+/*
+
+<div class="ui grid container">
+          <div class="four wide column">
+            <Filter />
+          </div>
+          <div class="twelve wide column">
+          
+              {products.map((product) => (
+                <div className="four wide column" key={product._id}>
+                
+                  <ProductComponent product={product} like={isLike(product._id)} />
+                
+                </div>
+                
+              ))}  
+         
+           </div>
+
+    </div>
+
+*/
